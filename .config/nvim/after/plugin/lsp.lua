@@ -25,6 +25,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
 end
 
 local lsp_flags = {
@@ -62,6 +63,13 @@ require('lspconfig')['rust_analyzer'].setup{
 
 -- GO
 require('lspconfig')['gopls'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}
+
+-- PRISMA 
+require('lspconfig')['prismals'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
