@@ -82,4 +82,6 @@ return require('packer').startup(function(use)
   use 'ThePrimeagen/vim-be-good'
 
   use 'nyoom-engineering/oxocarbon.nvim'
+
+  use 'dense-analysis/neural'
 end)

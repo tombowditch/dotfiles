@@ -1,0 +1,5 @@
+require('neural').setup({
+    open_ai = {
+        api_key = 'XXXXXXXXXXXXXXXXXXXXXXXX'
+    }
+}
