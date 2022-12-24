@@ -80,4 +80,6 @@ return require('packer').startup(function(use)
   use 'wakatime/vim-wakatime'
 
   use 'ThePrimeagen/vim-be-good'
+
+  use 'nyoom-engineering/oxocarbon.nvim'
 end)
