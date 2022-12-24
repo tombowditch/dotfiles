@@ -84,4 +84,7 @@ return require('packer').startup(function(use)
   use 'nyoom-engineering/oxocarbon.nvim'
 
   use 'dense-analysis/neural'
+
+  use 'MunifTanjim/nui.nvim'
+  use 'ElPiloto/significant.nvim'
 end)
