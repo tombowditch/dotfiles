@@ -1,4 +1,5 @@
 vim.opt.relativenumber = true
+vim.opt.nu = true
 vim.opt.smartindent = true
 -- vim.g.mapleader = "<Space>"
 vim.g.mapleader = ","
@@ -7,3 +8,8 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.updatetime = 50
+vim.opt.guifont = "JetBrains Mono:h14"
