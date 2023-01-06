@@ -49,7 +49,23 @@ return require('packer').startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
-  use 'github/copilot.vim'
+  use {
+    'zbirenbaum/copilot.lua',
+    event = 'VimEnter',
+    config = function()
+      vim.defer_fn(function()
+        require('copilot').setup()
+      end, 100)
+    end,
+  }
+
+use {
+  'zbirenbaum/copilot-cmp',
+  after = {'copilot.lua'},
+  config = function ()
+    require('copilot_cmp').setup()
+  end
+}
 
   use 'navarasu/onedark.nvim'
 
@@ -103,4 +119,17 @@ return require('packer').startup(function(use)
       {'rafamadriz/friendly-snippets'},
     }
   }
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  
 end)

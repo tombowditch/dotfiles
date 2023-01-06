@@ -21,12 +21,6 @@ lsp.ensure_installed({
     'gopls'
   })
 
-
-  lsp.nvim_workspace()
-
-lsp.setup()
-
-
 local cmp = require("cmp")
 
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -36,17 +30,16 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings["<Tab>"] = nil
 cmp_mappings["<S-Tab>"] = nil
 
-
 local cmp_config = lsp.defaults.cmp_config({
   sources = {
-    { name = "luasnip", priority = 100 },
     { name = "nvim_lsp", priority = 90 },
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lua", priority = 90 },
     { name = "copilot", priority = 80 },
+    { name = "luasnip", priority = 70 },
     { name = "path", priority = 5 },
   },
-  mappings = cmp_mappings,
+  mapping = cmp_mappings,
 })
 
 cmp.setup(cmp_config)
@@ -79,5 +72,9 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>', bufopts)
     vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
 end)
+
+lsp.nvim_workspace()
+
+lsp.setup()
 
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
