@@ -37,8 +37,6 @@ return require('packer').startup(function(use)
       config = function() require("nvim-autopairs").setup {} end
   }
 
-  use 'neovim/nvim-lspconfig'
-
   use "glepnir/lspsaga.nvim"
 
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
@@ -50,15 +48,6 @@ return require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
-
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
 
   use 'github/copilot.vim'
 
@@ -89,4 +78,29 @@ return require('packer').startup(function(use)
   }
 
   use { "akinsho/toggleterm.nvim", tag = '*' }
+
+  -- LSP
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
+  
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'},
+      {'hrsh7th/cmp-cmdline'},
+  
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},
+      -- Snippet Collection (Optional)
+      {'rafamadriz/friendly-snippets'},
+    }
+  }
 end)
