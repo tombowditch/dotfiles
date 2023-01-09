@@ -1,80 +1,53 @@
 local lsp = require('lsp-zero')
--- lsp.preset('recommended')
-lsp.preset('lsp-compe')
+lsp.preset('recommended')
 
-lsp.setup()
 
 local status, saga = pcall(require, "lspsaga")
 if (not status) then return end
 
 saga.init_lsp_saga {
-    code_action_lightbulb = {
-        enable = false
-    }
+  code_action_lightbulb = {
+    enable = false
+  }
 }
 
 lsp.ensure_installed({
-    'tsserver',
-    'eslint',
-    'sumneko_lua',
-    'rust_analyzer',
-    'gopls'
-  })
+  'tsserver',
+  'eslint',
+  'sumneko_lua',
+  'rust_analyzer',
+  'gopls'
+})
 
 local cmp = require("cmp")
-
+local cmp_select = { behaviorr = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
 
 })
-
+-- copilot
 cmp_mappings["<Tab>"] = nil
 cmp_mappings["<S-Tab>"] = nil
 
-local cmp_config = lsp.defaults.cmp_config({
-  sources = {
-    { name = "nvim_lsp", priority = 90 },
-    { name = "nvim_lsp_signature_help" },
-    { name = "nvim_lua", priority = 90 },
-    { name = "copilot", priority = 80 },
-    { name = "luasnip", priority = 70 },
-    { name = "path", priority = 5 },
-  },
-  mapping = cmp_mappings,
-})
-
-cmp.setup(cmp_config)
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "path" },
-  }, {
-    {
-      name = "cmdline",
-      option = {
-        ignore_cmds = { "Man", "!" },
-      },
-    },
-  }),
-})
-cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
 })
 
 lsp.on_attach(function(client, bufnr)
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-	vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
-    vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', bufopts)
-    vim.keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
-    vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>', bufopts)
-    vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
+  vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
+  vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', bufopts)
+  vim.keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
+  vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>', bufopts)
+  vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
 end)
 
 lsp.nvim_workspace()
 
 lsp.setup()
+
+vim.diagnostic.config({
+  virtual_text = true,
+})
 
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
