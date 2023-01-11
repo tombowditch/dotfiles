@@ -42,6 +42,29 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
 end)
 
+-- rust tools
+local rust_lsp = lsp.build_options("rust_analyzer", {
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        allFeatures = true,
+        command = "clippy"
+      }
+    }
+  }
+})
+
+
+-- Initialize rust_analyzer with rust-tools
+require("rust-tools").setup({
+  server = rust_lsp,
+  tools = {
+    inlay_hints = {
+      auto = true,
+    }
+  }
+})
+
 lsp.nvim_workspace()
 
 lsp.setup()
