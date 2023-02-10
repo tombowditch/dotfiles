@@ -1,5 +1,14 @@
 local status, nvimTree = pcall(require, "nvim-tree")
-if (not status) then return end
+if (not status) then
+    return
+end
 
-nvimTree.setup({
+local function open_nvim_tree()
+    require("nvim-tree.api").tree.open()
+end
+
+nvimTree.setup({})
+
+vim.api.nvim_create_autocmd({"VimEnter"}, {
+    callback = open_nvim_tree
 })
