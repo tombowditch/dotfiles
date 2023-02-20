@@ -12,7 +12,9 @@ if (not status) then return end
 -- }
 
 saga.setup({
-
+  lightbulb = {
+    enable = false
+  }
 })
 
 lsp.ensure_installed({
