@@ -20,7 +20,6 @@ saga.setup({
 lsp.ensure_installed({
   'tsserver',
   'eslint',
-  'sumneko_lua',
   'rust_analyzer',
   'gopls'
 })
@@ -42,7 +41,8 @@ lsp.on_attach(function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
-  vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', bufopts)
+  -- vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
   vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>', bufopts)
   vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
