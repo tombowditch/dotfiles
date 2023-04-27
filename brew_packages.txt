@@ -1,0 +1,20 @@
+brew install --cask slack
+brew install --cask raycast
+brew install --cask wezterm
+brew install neovim
+brew install kubectl
+brew install pyenv
+brew install chruby
+brew install goenv
+brew install lazygit
+brew install gnu-sed
+brew install go
+brew install wget
+brew install --cask tuple
+brew install tfenv
+brew install ripgrep
+brew install forticlient-vpn
+brew install --cask insomnia
+brew install --cask postman
+brew install istioctl
+brew install --cask visual-studio-code
