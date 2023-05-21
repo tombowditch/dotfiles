@@ -27,7 +27,7 @@ lsp.ensure_installed({
 local cmp = require("cmp")
 local cmp_select = { behaviorr = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-
+  ["<CR>"] = cmp.mapping.confirm(cmp_select),
 })
 -- copilot
 cmp_mappings["<Tab>"] = nil
