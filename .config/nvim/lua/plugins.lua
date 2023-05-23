@@ -50,7 +50,7 @@ require("lazy").setup({ -- plugins
     -- end
   }, { "lewis6991/gitsigns.nvim" }, { "arkav/lualine-lsp-progress" }, { "wakatime/vim-wakatime" },
   { "ThePrimeagen/vim-be-good" },
-  { "nyoom-engineering/oxocarbon.nvim" }, { "dense-analysis/neural" }, { "MunifTanjim/nui.nvim" },
+  { "nyoom-engineering/oxocarbon.nvim" }, { "MunifTanjim/nui.nvim" },
   { "ElPiloto/significant.nvim" }, { "akinsho/toggleterm.nvim" }, {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim",
