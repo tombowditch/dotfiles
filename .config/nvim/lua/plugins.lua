@@ -37,18 +37,21 @@ require("lazy").setup({ -- plugins
   }, { "glepnir/lspsaga.nvim" }, {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" }
-  }, {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    lazy = false
-    -- config = function()
-    --     require("nvim-tree").setup {}
+  },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   lazy = false
+  --   -- config = function()
+  --   --     require("nvim-tree").setup {}
+  --
+  --   --     vim.api.nvim_create_autocmd({"VimEnter"}, {
+  --   --         callback = open_nvim_tree
+  --   --     })
+  --   -- end
+  -- },
 
-    --     vim.api.nvim_create_autocmd({"VimEnter"}, {
-    --         callback = open_nvim_tree
-    --     })
-    -- end
-  }, { "lewis6991/gitsigns.nvim" }, { "arkav/lualine-lsp-progress" }, { "wakatime/vim-wakatime" },
+  { "lewis6991/gitsigns.nvim" }, { "arkav/lualine-lsp-progress" }, { "wakatime/vim-wakatime" },
   { "ThePrimeagen/vim-be-good" },
   { "nyoom-engineering/oxocarbon.nvim" }, { "MunifTanjim/nui.nvim" },
   { "ElPiloto/significant.nvim" }, { "akinsho/toggleterm.nvim" }, {
@@ -76,7 +79,16 @@ require("lazy").setup({ -- plugins
   },
   {
     "jose-elias-alvarez/null-ls.nvim"
-  }
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    cmd = "Neotree",
+  },
 }, {
   -- options
 

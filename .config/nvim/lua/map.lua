@@ -22,6 +22,7 @@ end, o)
 vim.keymap.set("n", "<leader>S", "<cmd>lua require('spectre').open()<CR>", o)
 vim.keymap.set("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", o)
 vim.keymap.set("x", "p", '"_dP', o)
+vim.keymap.set("n", ";t", ":Neotree toggle<CR>", o)
 
 -- don't auto comment new line
 vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
