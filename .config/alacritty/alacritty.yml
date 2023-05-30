@@ -770,6 +770,7 @@ key_bindings:
   - { key: S, mods: Command, chars: "\x1b\x3a\x77\x0a" }
   # Kill the current tmux pane (and window if last pane)
   - { key: W, mods: Command, chars: "\x02\x78" }
+  - { key: J, mods: Command, chars: "\x02\x54" } # ctrl+b + T
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
