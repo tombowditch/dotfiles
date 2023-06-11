@@ -80,6 +80,7 @@ lsp.format_on_save({
     ["rust_analyzer"] = { "rust" },
     ["gopls"] = { "go" },
     ["prismals"] = { "prisma" },
+    ["terraformls"] = {"terraform"}
   }
 })
 
