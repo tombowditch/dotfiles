@@ -2,6 +2,7 @@ vim.opt.relativenumber = true
 vim.opt.nu = true
 vim.opt.smartindent = true
 -- vim.g.mapleader = "<Space>"
+vim.opt.wrap = true
 vim.g.mapleader = ","
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
