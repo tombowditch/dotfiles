@@ -136,6 +136,12 @@ require("lazy").setup({ -- plugins
       desc = "Toggle Flash Search",
     },
   },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  config = function()
+    require("lsp_lines").setup()
+  end,
+    }
 }
 }, {
   -- options
