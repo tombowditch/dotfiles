@@ -1,28 +1,10 @@
 require("lazy").setup(
   {
-    -- plugins
     {
       "rose-pine/neovim",
       name = "rose-pine"
     },
-    -- {
-    --     "navarasu/onedark.nvim",
-    --     priority = 1000,
-    --     lazy = false,
-    --     config = function()
-    --         require('onedark').setup {
-    --             style = 'deep'
-    --         }
-    --         require('onedark').load()
-    --     end
-    -- },
     { "ellisonleao/gruvbox.nvim" },
-    {
-      "numToStr/Comment.nvim",
-      config = function()
-        require("Comment").setup()
-      end
-    },
     {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate"
@@ -48,19 +30,6 @@ require("lazy").setup(
       "akinsho/bufferline.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" }
     },
-    -- {
-    --   "nvim-tree/nvim-tree.lua",
-    --   dependencies = { "nvim-tree/nvim-web-devicons" },
-    --   lazy = false
-    --   -- config = function()
-    --   --     require("nvim-tree").setup {}
-    --
-    --   --     vim.api.nvim_create_autocmd({"VimEnter"}, {
-    --   --         callback = open_nvim_tree
-    --   --     })
-    --   -- end
-    -- },
-
     { "lewis6991/gitsigns.nvim" },
     { "arkav/lualine-lsp-progress" },
     { "wakatime/vim-wakatime" },
@@ -212,6 +181,13 @@ require("lazy").setup(
       'nvim-telescope/telescope-fzf-native.nvim',
       build =
       'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+    },
+    {
+      'echasnovski/mini.nvim',
+      version = false,
+      config = function()
+        require('mini.comment').setup()
+      end
     }
   },
   {}
