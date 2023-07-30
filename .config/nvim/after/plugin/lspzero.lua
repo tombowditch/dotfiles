@@ -21,7 +21,10 @@ lsp.ensure_installed({
   'tsserver',
   'eslint',
   'rust_analyzer',
-  'gopls'
+  'gopls',
+  'prismals',
+  'terraform_ls',
+  'lua_ls'
 })
 
 local cmp = require("cmp")
@@ -80,7 +83,8 @@ lsp.format_on_save({
     ["rust_analyzer"] = { "rust" },
     ["gopls"] = { "go" },
     ["prismals"] = { "prisma" },
-    ["terraformls"] = {"terraform"}
+    ["terraform_ls"] = { "terraform", "tf" },
+    ["lua_ls"] = { "lua" }
   }
 })
 

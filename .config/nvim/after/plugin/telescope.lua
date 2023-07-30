@@ -16,7 +16,7 @@ telescope.setup {
         ["q"] = actions.close
       },
     },
-    file_ignore_patterns = {"node_modules", "^.git/", ".git/"},
+    file_ignore_patterns = { "node_modules", "^.git/", ".git/" },
   },
   extensions = {
     file_browser = {

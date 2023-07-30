@@ -21,7 +21,9 @@ ts.setup {
     "prisma",
     "go",
     "rust",
-    "help"
+    "help",
+    "markdown",
+    "markdown_inline"
   },
   ignore_install = {
     "phpdoc"
@@ -30,3 +32,4 @@ ts.setup {
     enable = true,
   },
 }
+
