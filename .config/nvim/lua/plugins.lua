@@ -122,7 +122,6 @@ require("lazy").setup(
     {
       "folke/flash.nvim",
       event = "VeryLazy",
-      ---@type Flash.Config
       opts = {},
       keys = {
         {
@@ -208,6 +207,11 @@ require("lazy").setup(
           background_colour = "#000000",
         }
       end
+    },
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build =
+      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     }
   },
   {}
