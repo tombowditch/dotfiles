@@ -13,8 +13,23 @@ vim.fn.sign_define("DiagnosticSignHint",
   { text = "", texthl = "DiagnosticSignHint" })
 
 neotree.setup({
-  close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+  close_if_last_window = false,
   popup_border_style = "rounded",
   enable_git_status = true,
   enable_diagnostics = true,
+  filesystem = {
+    bind_to_cwd = true,
+    follow_current_file = {
+      enabled = true,
+    },
+    use_libuv_file_watcher = true,
+  },
+  default_component_configs = {
+    indent = {
+      with_expanders = true,
+      expander_collapsed = "",
+      expander_expanded = "",
+      expander_highlight = "NeoTreeExpander",
+    },
+  },
 })

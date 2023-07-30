@@ -12,31 +12,44 @@ require("lazy").setup(
     {
       "nvim-telescope/telescope.nvim",
       tag = "0.1.0",
-      dependencies = { "nvim-lua/plenary.nvim" }
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-telescope/telescope-file-browser.nvim",
+      }
     },
-    { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-telescope/telescope-file-browser.nvim" },
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" }
     },
     {
-      "windwp/nvim-autopairs",
-      config = function()
-        require("nvim-autopairs").setup {}
-      end
-    },
-    {
       "akinsho/bufferline.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons" }
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      opts = {
+        options = {
+          mode = "tabs",
+          always_show_bufferline = true,
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          color_icons = true,
+          diagnostics = "nvim_lsp",
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "Neo-tree",
+              highlight = "Directory",
+              text_align = "left",
+            },
+          },
+        },
+      },
+      keys = {
+        { "P", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" }
+      }
     },
     { "lewis6991/gitsigns.nvim" },
     { "arkav/lualine-lsp-progress" },
     { "wakatime/vim-wakatime" },
-    { "ThePrimeagen/vim-be-good" },
-    { "nyoom-engineering/oxocarbon.nvim" },
-    { "MunifTanjim/nui.nvim" },
-    { "ElPiloto/significant.nvim" },
     { "akinsho/toggleterm.nvim" },
     {
       "VonHeikemen/lsp-zero.nvim",
@@ -83,7 +96,7 @@ require("lazy").setup(
       "nvim-neo-tree/neo-tree.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim"
       },
       cmd = "Neotree"
@@ -187,6 +200,7 @@ require("lazy").setup(
       version = false,
       config = function()
         require('mini.comment').setup()
+        require('mini.pairs').setup()
       end
     }
   },
