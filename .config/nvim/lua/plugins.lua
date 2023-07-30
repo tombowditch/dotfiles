@@ -172,6 +172,25 @@ require("lazy").setup(
           require("lsp_lines").setup()
         end
       }
+    },
+    {
+      "smjonas/inc-rename.nvim",
+      config = function()
+        require("inc_rename").setup()
+      end,
+    },
+    {
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      opts = {
+        presets = {
+          inc_rename = true,
+        }
+      },
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      }
     }
   },
   {}
