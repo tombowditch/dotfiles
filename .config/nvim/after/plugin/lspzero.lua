@@ -1,22 +1,6 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-
-local status, saga = pcall(require, "lspsaga")
-if (not status) then return end
-
--- saga.init_lsp_saga {
---   code_action_lightbulb = {
---     enable = false
---   }
--- }
-
-saga.setup({
-  lightbulb = {
-    enable = false
-  }
-})
-
 lsp.ensure_installed({
   'tsserver',
   'eslint',
@@ -47,8 +31,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gd', function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, bufopts)
   vim.keymap.set('n', 'gf', '<Cmd>Telescope lsp_references<CR>', bufopts)
-  vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>', bufopts)
-  -- vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
+  vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', 'gc', vim.lsp.buf.code_action, bufopts)
 end)
 
