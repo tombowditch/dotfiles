@@ -23,7 +23,7 @@ lsp.ensure_installed({
   'rust_analyzer',
   'gopls',
   'prismals',
-  'terraform_ls',
+  'terraformls',
   'lua_ls'
 })
 
@@ -44,11 +44,12 @@ lsp.on_attach(function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
-  -- vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
+  vim.keymap.set('n', 'gd', function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, bufopts)
+  vim.keymap.set('n', 'gf', '<Cmd>Telescope lsp_references<CR>', bufopts)
   vim.keymap.set('n', 'gR', '<Cmd>Lspsaga rename<CR>', bufopts)
-  vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
+  -- vim.keymap.set('n', 'gc', '<Cmd>Lspsaga code_action<CR>', bufopts)
+  vim.keymap.set('n', 'gc', vim.lsp.buf.code_action, bufopts)
 end)
 
 -- rust tools
@@ -83,7 +84,7 @@ lsp.format_on_save({
     ["rust_analyzer"] = { "rust" },
     ["gopls"] = { "go" },
     ["prismals"] = { "prisma" },
-    ["terraform_ls"] = { "terraform", "tf" },
+    ["terraformls"] = { "terraform", "tf" },
     ["lua_ls"] = { "lua" }
   }
 })
