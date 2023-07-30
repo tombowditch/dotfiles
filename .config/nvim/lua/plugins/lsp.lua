@@ -1,5 +1,8 @@
 return {
   {
+    "jose-elias-alvarez/null-ls.nvim"
+  },
+  {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
@@ -13,7 +16,9 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-cmdline",
       "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets"
+      "rafamadriz/friendly-snippets",
+      "simrat39/rust-tools.nvim",
+      "github/copilot.vim",
     },
     config = function()
       local lsp = require('lsp-zero')
@@ -107,18 +112,18 @@ return {
       null_ls.setup({
         on_attach = function(client, bufnr)
           null_opts.on_attach(client, bufnr)
-          ---
-          -- you can add other stuff here....
-          ---
         end,
         sources = {
-          -- Replace these with the tools you have installed
           null_ls.builtins.formatting.prettierd,
           null_ls.builtins.diagnostics.eslint_d,
         }
       })
-
-      -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
     end
   },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end
+  }
 }

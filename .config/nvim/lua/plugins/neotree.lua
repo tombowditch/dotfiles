@@ -37,6 +37,11 @@ return {
           expander_highlight = "NeoTreeExpander",
         },
       },
+    },
+    keys = {
+      {
+        ";t", "<Cmd>Neotree toggle<CR>", desc = "Toggle Neo-tree"
+      }
     }
   },
 }

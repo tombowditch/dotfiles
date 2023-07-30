@@ -1,8 +1,3 @@
-local status, comments = pcall(require, "Comment.api")
-if not status then
-  return
-end
-
 local o = {
   silent = true
 }
@@ -15,10 +10,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>gg", function()
   _LAZYGIT_TOGGLE()
 end, o)
-vim.keymap.set("n", "<leader>S", "<cmd>lua require('spectre').open()<CR>", o)
-vim.keymap.set("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", o)
 vim.keymap.set("x", "p", '"_dP', o)
-vim.keymap.set("n", ";t", ":Neotree toggle<CR>", o)
 
 --- Remove all trailing whitespace on save
 local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
