@@ -103,7 +103,7 @@ return {
       lsp.setup()
 
       vim.diagnostic.config({
-        virtual_text = false,
+        virtual_text = true,
       })
 
       local null_ls = require('null-ls')
@@ -120,10 +120,4 @@ return {
       })
     end
   },
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end
-  }
 }
