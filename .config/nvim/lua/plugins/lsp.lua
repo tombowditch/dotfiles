@@ -19,6 +19,7 @@ return {
       "rafamadriz/friendly-snippets",
       "simrat39/rust-tools.nvim",
       "github/copilot.vim",
+      {"roobert/tailwindcss-colorizer-cmp.nvim", config=true},
     },
     config = function()
       local lsp = require('lsp-zero')
@@ -45,7 +46,10 @@ return {
       cmp_mappings["<S-Tab>"] = nil
 
       lsp.setup_nvim_cmp({
-        mapping = cmp_mappings
+        mapping = cmp_mappings,
+        formatting = {
+          format = require('tailwindcss-colorizer-cmp').formatter,
+        }
       })
 
       lsp.on_attach(function(client, bufnr)
@@ -120,4 +124,14 @@ return {
       })
     end
   },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({
+        user_default_options = {
+          tailwind = true,
+        }
+      })
+    end
+  }
 }
