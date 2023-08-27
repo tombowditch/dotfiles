@@ -63,7 +63,7 @@ return {
         vim.keymap.set("n", "gR", function()
           return ":IncRename " .. vim.fn.expand("<cword>")
         end, { expr = true })
-        vim.keymap.set('n', 'gc', vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
       end)
 
       -- rust tools
