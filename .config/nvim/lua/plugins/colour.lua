@@ -55,5 +55,10 @@ return {
       }
     }
   },
-  { "ellisonleao/gruvbox.nvim" },
+  {
+    "ellisonleao/gruvbox.nvim"
+  },
+  {
+    "rebelot/kanagawa.nvim",
+  },
 }
