@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p ~/.config/{nvim,wezterm}
+mkdir -p ~/.config/{nvim,wezterm,tmux,alacritty}
 
 # neovim
 ln -s ~/code/dotfiles/.config/nvim ~/.config/nvim
