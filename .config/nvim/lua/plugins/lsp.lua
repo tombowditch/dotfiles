@@ -19,7 +19,7 @@ return {
       "rafamadriz/friendly-snippets",
       "simrat39/rust-tools.nvim",
       "github/copilot.vim",
-      {"roobert/tailwindcss-colorizer-cmp.nvim", config=true},
+      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
     },
     config = function()
       local lsp = require('lsp-zero')
@@ -44,6 +44,8 @@ return {
       -- copilot
       cmp_mappings["<Tab>"] = nil
       cmp_mappings["<S-Tab>"] = nil
+      cmp_mappings["<C-Space>"] = cmp.mapping.complete()
+
 
       lsp.setup_nvim_cmp({
         mapping = cmp_mappings,
