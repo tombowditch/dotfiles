@@ -437,12 +437,19 @@ cursor:
 #  args:
 #    - --login
 
+# shell:
+#   program: /opt/homebrew/bin/fish
+#   args:
+#     - -l
+#     - -c
+#     - "tmux -u attach || tmux -u"
+
 shell:
   program: /opt/homebrew/bin/fish
   args:
     - -l
     - -c
-    - "tmux -u attach || tmux -u"
+    - "t"
 
 # Startup directory
 #

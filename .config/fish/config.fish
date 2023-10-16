@@ -15,6 +15,7 @@ set -Ux EDITOR nvim
 set -Ux TERM xterm-256color
 set -Ux BUN_INSTALL "/Users/tom/.bun"
 set -Ux SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+set -Ux T_SESSION_NAME_INCLUDE_PARENT true
 
 
 # Aliases
