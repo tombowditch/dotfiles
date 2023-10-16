@@ -4,4 +4,5 @@ edc/bass
 evanlucas/fish-kubectl-completions
 jhillyerd/plugin-git
 jorgebucaran/nvm.fish
-acomagu/fish-async-prompt
+catppuccin/fish
+ilancosman/tide@v6
