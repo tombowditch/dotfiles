@@ -438,7 +438,7 @@ cursor:
 #    - --login
 
 shell:
-  program: /bin/zsh
+  program: /opt/homebrew/bin/fish
   args:
     - -l
     - -c
