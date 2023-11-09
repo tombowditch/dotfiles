@@ -7,6 +7,7 @@ fish_add_path ~/.local/bin
 fish_add_path ~/go/bin
 fish_add_path ~/.bun/bin
 fish_add_path ~/.config/tmux/plugins/t-smart-tmux-session-manager/bin
+fish_add_path ~/code/scripts
 
 set -U fish_greeting # disable fish greeting
 set -U fish_key_bindings fish_vi_key_bindings
@@ -16,7 +17,6 @@ set -Ux TERM xterm-256color
 set -Ux BUN_INSTALL "/Users/tom/.bun"
 set -Ux SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 set -Ux T_SESSION_NAME_INCLUDE_PARENT true
-
 
 # Aliases
 
@@ -38,3 +38,5 @@ atuin init fish | source
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
+
+
