@@ -8,6 +8,7 @@ fish_add_path ~/go/bin
 fish_add_path ~/.bun/bin
 fish_add_path ~/.config/tmux/plugins/t-smart-tmux-session-manager/bin
 fish_add_path ~/code/scripts
+fish_add_path ~/.cargo/bin
 
 set -U fish_greeting # disable fish greeting
 set -U fish_key_bindings fish_vi_key_bindings
