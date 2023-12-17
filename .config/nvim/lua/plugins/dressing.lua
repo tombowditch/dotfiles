@@ -1,6 +1,6 @@
 return {
-  {
-    "stevearc/dressing.nvim",
-    event = "BufReadPre",
-  }
+	{
+		"stevearc/dressing.nvim",
+		event = "BufReadPre",
+	},
 }
