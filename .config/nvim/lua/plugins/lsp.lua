@@ -90,6 +90,9 @@ return {
 				},
 			})
 
+			-- cody/sg
+			require("sg").setup({})
+
 			-- Initialize rust_analyzer with rust-tools
 			require("rust-tools").setup({
 				server = rust_lsp,

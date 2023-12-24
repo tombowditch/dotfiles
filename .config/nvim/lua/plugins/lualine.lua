@@ -12,7 +12,10 @@ return {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
-					statusline = {},
+					statusline = {
+						"help",
+						"neo-tree",
+					},
 					winbar = {},
 				},
 				ignore_focus = {},
