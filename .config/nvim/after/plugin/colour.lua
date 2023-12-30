@@ -23,3 +23,6 @@ vim.cmd.colorscheme("kanagawa")
 
 -- VITESSE
 -- vim.cmd.colorscheme("vitesse")
+
+-- GITHUB LIGHT
+-- vim.cmd.colorscheme("github_light")

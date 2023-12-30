@@ -67,4 +67,11 @@ return {
 			"tjdevries/colorbuddy.nvim",
 		},
 	},
+	{
+		"miikanissi/modus-themes.nvim",
+		priority = 1000,
+	},
+	{
+		"projekt0n/github-nvim-theme",
+	},
 }
