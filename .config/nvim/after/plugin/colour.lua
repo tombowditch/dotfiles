@@ -19,10 +19,12 @@
 -- vim.api.nvim_set_hl(0, "TelescopePreviewLine", { fg = oxocarbon.none, bg = oxocarbon.base01 })
 
 -- KANAGAWA
-vim.cmd.colorscheme("kanagawa")
+-- vim.cmd.colorscheme("kanagawa")
 
 -- VITESSE
 -- vim.cmd.colorscheme("vitesse")
 
 -- GITHUB LIGHT
 -- vim.cmd.colorscheme("github_light")
+
+vim.cmd.colorscheme("horizon")

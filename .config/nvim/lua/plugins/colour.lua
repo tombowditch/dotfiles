@@ -74,4 +74,8 @@ return {
 	{
 		"projekt0n/github-nvim-theme",
 	},
+	{
+		"akinsho/horizon.nvim",
+		version = "*",
+	},
 }
