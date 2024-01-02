@@ -82,6 +82,14 @@ return {
 			local rust_lsp = lsp.build_options("rust_analyzer", {
 				settings = {
 					["rust-analyzer"] = {
+						cargo = {
+							buildScripts = {
+								enable = true,
+							},
+						},
+						procMacro = {
+							enable = true,
+						},
 						checkOnSave = {
 							allFeatures = true,
 							command = "clippy",

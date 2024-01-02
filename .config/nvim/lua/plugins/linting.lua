@@ -13,6 +13,7 @@ return {
 			python = { "pylint" },
 			lua = { "luacheck" },
 			go = { "golangcilint" },
+			proto = { "buf" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
