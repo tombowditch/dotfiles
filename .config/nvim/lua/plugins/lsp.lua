@@ -15,7 +15,6 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
-			"simrat39/rust-tools.nvim",
 			"github/copilot.vim",
 			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
 		},
@@ -36,7 +35,7 @@ return {
 					"isort",
 
 					"tsserver",
-					"rust_analyzer",
+					-- "rust_analyzer",
 					"gopls",
 					"prismals",
 					"terraformls",
@@ -78,38 +77,38 @@ return {
 				vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
 			end)
 
-			-- rust tools
-			local rust_lsp = lsp.build_options("rust_analyzer", {
-				settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							buildScripts = {
-								enable = true,
-							},
-						},
-						procMacro = {
-							enable = true,
-						},
-						checkOnSave = {
-							allFeatures = true,
-							command = "clippy",
-						},
-					},
-				},
-			})
+			-- -- rust tools
+			-- local rust_lsp = lsp.build_options("rust_analyzer", {
+			-- 	settings = {
+			-- 		["rust-analyzer"] = {
+			-- 			cargo = {
+			-- 				buildScripts = {
+			-- 					enable = true,
+			-- 				},
+			-- 			},
+			-- 			procMacro = {
+			-- 				enable = true,
+			-- 			},
+			-- 			checkOnSave = {
+			-- 				allFeatures = true,
+			-- 				command = "clippy",
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
 
 			-- cody/sg
 			require("sg").setup({})
 
-			-- Initialize rust_analyzer with rust-tools
-			require("rust-tools").setup({
-				server = rust_lsp,
-				tools = {
-					inlay_hints = {
-						auto = true,
-					},
-				},
-			})
+			-- -- Initialize rust_analyzer with rust-tools
+			-- require("rust-tools").setup({
+			-- 	server = rust_lsp,
+			-- 	tools = {
+			-- 		inlay_hints = {
+			-- 			auto = true,
+			-- 		},
+			-- 	},
+			-- })
 
 			lsp.nvim_workspace()
 
@@ -128,6 +127,58 @@ return {
 					tailwind = true,
 				},
 			})
+		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		dependencies = {
+			{
+				"lvimuser/lsp-inlayhints.nvim",
+				opts = {},
+			},
+		},
+		version = "^3",
+		ft = { "rust" },
+		config = function()
+			vim.g.rustaceanvim = {
+				-- Plugin configuration
+				tools = {
+					code_actions = {
+						use_telescope = true,
+					},
+				},
+				-- LSP configuration
+				server = {
+					on_attach = function(client, bufnr)
+						require("lsp-inlayhints").on_attach(client, bufnr)
+
+						local bufnr = vim.api.nvim_get_current_buf()
+
+						vim.keymap.set("n", "ga", function()
+							vim.cmd.RustLsp("codeAction")
+						end, { silent = true, buffer = bufnr })
+					end,
+					settings = {
+						-- rust-analyzer language server configuration
+						["rust-analyzer"] = {
+							cargo = {
+								buildScripts = {
+									enable = true,
+								},
+							},
+							procMacro = {
+								enable = true,
+							},
+							checkOnSave = {
+								allFeatures = true,
+								command = "clippy",
+							},
+						},
+					},
+				},
+				-- DAP configuration
+				dap = {},
+			}
 		end,
 	},
 }
