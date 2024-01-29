@@ -65,8 +65,6 @@ return {
 				},
 			})
 
-			local formatAugroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 			lsp.on_attach(function(client, bufnr)
 				local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -80,57 +78,16 @@ return {
 					return ":IncRename " .. vim.fn.expand("<cword>")
 				end, { expr = true })
 				vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
-
-				-- auto format
-
-				if client.supports_method("textDocument/formatting") then
-					vim.api.nvim_clear_autocmds({ group = formatAugroup, buffer = bufnr })
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						group = formatAugroup,
-						buffer = bufnr,
-						callback = function()
-							vim.lsp.buf.format({ async = false })
-						end,
-					})
-				end
 			end)
-
-			-- -- rust tools
-			-- local rust_lsp = lsp.build_options("rust_analyzer", {
-			-- 	settings = {
-			-- 		["rust-analyzer"] = {
-			-- 			cargo = {
-			-- 				buildScripts = {
-			-- 					enable = true,
-			-- 				},
-			-- 			},
-			-- 			procMacro = {
-			-- 				enable = true,
-			-- 			},
-			-- 			checkOnSave = {
-			-- 				allFeatures = true,
-			-- 				command = "clippy",
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
 
 			-- cody/sg
 			require("sg").setup({})
 
-			-- -- Initialize rust_analyzer with rust-tools
-			-- require("rust-tools").setup({
-			-- 	server = rust_lsp,
-			-- 	tools = {
-			-- 		inlay_hints = {
-			-- 			auto = true,
-			-- 		},
-			-- 	},
-			-- })
-
 			lsp.nvim_workspace()
 
 			lsp.setup()
+
+			-- vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
 
 			vim.diagnostic.config({
 				virtual_text = true,
