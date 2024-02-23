@@ -1,29 +1,53 @@
-local a = {
+local on_attach = function(client, bufnr)
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "gd", function()
+    require("telescope.builtin").lsp_definitions({ reuse_win = true })
+  end, bufopts)
+  vim.keymap.set("n", "gf", "<Cmd>Telescope lsp_references<CR>", bufopts)
+  vim.keymap.set("n", "gR", function()
+    return ":IncRename " .. vim.fn.expand("<cword>")
+  end, { expr = true })
+
+  if client.name == "rust-analyzer" or client.name == "rust_analyzer" then
+    -- custom code actions for rust
+    vim.keymap.set("n", "ga", function()
+      vim.cmd.RustLsp("codeAction")
+    end, bufopts)
+  else
+    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
+  end
+end
+
+return {
   {
-    "VonHeikemen/lsp-zero.nvim",
+    "neovim/nvim-lspconfig",
+    lazy = false,
     dependencies = {
-      "neovim/nvim-lspconfig",
+      -- Mason
       "williamboman/mason.nvim",
+      -- Mason lspconfig
       "williamboman/mason-lspconfig.nvim",
+      -- Mason auto installer
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "hrsh7th/nvim-cmp",
+      -- Completion
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-cmdline",
+      "hrsh7th/nvim-cmp",
       "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      -- Other
       "rafamadriz/friendly-snippets",
-      "github/copilot.vim",
-      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+      "onsails/lspkind.nvim",
+      "roobert/tailwindcss-colorizer-cmp.nvim",
     },
+
     config = function()
-      local lsp = require("lsp-zero")
-      lsp.preset("recommended")
-
       local mason_tool_installer = require("mason-tool-installer")
-
       mason_tool_installer.setup({
         ensure_installed = {
           "prettier",
@@ -48,49 +72,119 @@ local a = {
       })
 
       local cmp = require("cmp")
-      local cmp_select = { behaviorr = cmp.SelectBehavior.Select }
-      local cmp_mappings = lsp.defaults.cmp_mappings({
-        ["<CR>"] = cmp.mapping.confirm(cmp_select),
-      })
+      local cmp_lsp = require("cmp_nvim_lsp")
 
-      -- copilot
-      cmp_mappings["<Tab>"] = nil
-      cmp_mappings["<S-Tab>"] = nil
-      cmp_mappings["<C-Space>"] = cmp.mapping.complete()
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        cmp_lsp.default_capabilities()
+      )
 
-      lsp.setup_nvim_cmp({
-        mapping = cmp_mappings,
-        formatting = {
-          format = require("tailwindcss-colorizer-cmp").formatter,
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        handlers = {
+          function(server_name)
+            require("lspconfig")[server_name].setup({
+              capabilities = capabilities,
+              on_attach = on_attach,
+            })
+          end,
+          -- ["rust_analyzer"] = function()
+          --   local lspconfig = require("lspconfig")
+          --   lspconfig.rust_analyzer.setup({
+          --     capabilities = capabilities,
+          --     on_attach = on_attach,
+          --     settings = {
+          --       ["rust-analyzer"] = {
+          --         checkOnSave = {
+          --           command = "clippy",
+          --         },
+          --       },
+          --     },
+          --   })
+          -- end,
         },
       })
 
-      lsp.on_attach(function(client, bufnr)
-        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+        }, {
+          { name = "buffer" },
+        }),
+        formatting = {
+          fields = {
+            cmp.ItemField.Menu,
+            cmp.ItemField.Abbr,
+            cmp.ItemField.Kind,
+          },
+          format = require("lspkind").cmp_format({
+            mode = "symbol_text",
+            menu = {
+              buffer = "[BUF]",
+              nvim_lsp = "[LSP]",
+              nvim_lua = "[LUA]",
+              path = "[PATH]",
+              luasnip = "[SNIP]",
+            },
+            before = require("tailwindcss-colorizer-cmp").formatter,
+          }),
+        },
+      })
 
-        vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-        vim.keymap.set("n", "gd", function()
-          require("telescope.builtin").lsp_definitions({ reuse_win = true })
-        end, bufopts)
-        vim.keymap.set("n", "gf", "<Cmd>Telescope lsp_references<CR>", bufopts)
-        vim.keymap.set("n", "gR", function()
-          return ":IncRename " .. vim.fn.expand("<cword>")
-        end, { expr = true })
-        vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
-      end)
-
-      -- cody/sg
-      require("sg").setup({})
-
-      lsp.nvim_workspace()
-
-      lsp.setup()
-
-      -- vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       vim.diagnostic.config({
+        title = false,
+        underline = true,
         virtual_text = true,
+        signs = true,
+        update_in_insert = false,
+        severity_sort = true,
+        float = {
+          source = "always",
+          style = "minimal",
+          border = "rounded",
+          header = "",
+          prefix = "",
+        },
+      })
+    end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = false,
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = "<Tab>",
+          },
+        },
       })
     end,
   },
@@ -106,12 +200,6 @@ local a = {
   },
   {
     "mrcjkb/rustaceanvim",
-    dependencies = {
-      {
-        "lvimuser/lsp-inlayhints.nvim",
-        opts = {},
-      },
-    },
     version = "^3",
     ft = { "rust" },
     config = function()
@@ -124,15 +212,7 @@ local a = {
         },
         -- LSP configuration
         server = {
-          on_attach = function(client, bufnr)
-            require("lsp-inlayhints").on_attach(client, bufnr)
-
-            local bufnr = vim.api.nvim_get_current_buf()
-
-            vim.keymap.set("n", "ga", function()
-              vim.cmd.RustLsp("codeAction")
-            end, { silent = true, buffer = bufnr })
-          end,
+          on_attach = on_attach,
           settings = {
             -- rust-analyzer language server configuration
             ["rust-analyzer"] = {
@@ -157,5 +237,3 @@ local a = {
     end,
   },
 }
-
-return {}
