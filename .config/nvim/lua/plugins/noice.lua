@@ -15,6 +15,14 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			notify = {
+				enabled = true,
+				view = "mini",
+			},
+			messages = {
+				enabled = true,
+				view = "mini",
+			},
 		},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
