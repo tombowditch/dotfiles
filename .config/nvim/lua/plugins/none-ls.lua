@@ -15,7 +15,7 @@ return {
 					null_ls.builtins.formatting.buf,
 
 					-- DIAGNOSTICS
-					null_ls.builtins.diagnostics.eslint_d,
+					-- null_ls.builtins.diagnostics.eslint_d,
 					null_ls.builtins.diagnostics.buf,
 					null_ls.builtins.diagnostics.checkmake,
 					-- null_ls.builtins.diagnostics.golangci_lint,
