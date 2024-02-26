@@ -52,15 +52,13 @@ return {
 				ensure_installed = {
 					"prettier",
 					"prettierd",
-					-- "eslint_d",
+					"eslint-lsp",
 					"pylint",
 					"luacheck",
 					"stylua",
 					"black",
 					"isort",
 
-					-- "tsserver",
-					-- "rust_analyzer",
 					"gopls",
 					"golangci_lint_ls",
 					"prismals",
