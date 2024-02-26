@@ -1,26 +1,3 @@
-local on_attach = function(client, bufnr)
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
-	vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gd", function()
-		require("telescope.builtin").lsp_definitions({ reuse_win = true })
-	end, bufopts)
-	vim.keymap.set("n", "gf", "<Cmd>Telescope lsp_references<CR>", bufopts)
-	vim.keymap.set("n", "gR", function()
-		return ":IncRename " .. vim.fn.expand("<cword>")
-	end, { expr = true })
-
-	if client.name == "rust-analyzer" or client.name == "rust_analyzer" then
-		-- custom code actions for rust
-		vim.keymap.set("n", "ga", function()
-			vim.cmd.RustLsp("codeAction")
-		end, bufopts)
-	else
-		vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
-	end
-end
-
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -86,14 +63,12 @@ return {
 					function(server_name)
 						require("lspconfig")[server_name].setup({
 							capabilities = capabilities,
-							on_attach = on_attach,
 						})
 					end,
 					-- ["rust_analyzer"] = function()
 					--   local lspconfig = require("lspconfig")
 					--   lspconfig.rust_analyzer.setup({
 					--     capabilities = capabilities,
-					--     on_attach = on_attach,
 					--     settings = {
 					--       ["rust-analyzer"] = {
 					--         checkOnSave = {
@@ -169,6 +144,56 @@ return {
 					prefix = "",
 				},
 			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("tb-lsp-attach", { clear = true }),
+				callback = function(event)
+					local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client == nil then
+						print("client is nil")
+						return
+					end
+
+					-- do not setup bindings for copilot
+					if client.name == "copilot" then
+						return
+					end
+
+					vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+					vim.keymap.set("n", "gd", function()
+						require("telescope.builtin").lsp_definitions({ reuse_win = true })
+					end, bufopts)
+					vim.keymap.set("n", "gf", "<Cmd>Telescope lsp_references<CR>", bufopts)
+					vim.keymap.set("n", "gR", function()
+						return ":IncRename " .. vim.fn.expand("<cword>")
+					end, { expr = true })
+
+					if client.name == "rust-analyzer" or client.name == "rust_analyzer" then
+						-- custom code actions for rust
+						vim.keymap.set("n", "ga", function()
+							vim.cmd.RustLsp("codeAction")
+						end, bufopts)
+					else
+						vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
+					end
+
+					-- highlight
+					if client and client.server_capabilities.documentHighlightProvider then
+						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+							buffer = event.buf,
+							callback = vim.lsp.buf.document_highlight,
+						})
+
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+							buffer = event.buf,
+							callback = vim.lsp.buf.clear_references,
+						})
+					end
+				end,
+			})
 		end,
 	},
 	{
@@ -223,7 +248,6 @@ return {
 				},
 				-- LSP configuration
 				server = {
-					on_attach = on_attach,
 					settings = {
 						-- rust-analyzer language server configuration
 						["rust-analyzer"] = {
