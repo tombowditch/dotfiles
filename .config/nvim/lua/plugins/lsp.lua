@@ -251,6 +251,12 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^4",
 		ft = { "rust" },
+		dependencies = {
+			{
+				"lvimuser/lsp-inlayhints.nvim",
+				opts = {},
+			},
+		},
 		config = function()
 			vim.g.rustaceanvim = {
 				-- Plugin configuration
@@ -261,6 +267,10 @@ return {
 				},
 				-- LSP configuration
 				server = {
+					-- TEMP until nvim 0.10
+					on_attach = function(client, bufnr)
+						require("lsp-inlayhints").on_attach(client, bufnr)
+					end,
 					settings = {
 						-- rust-analyzer language server configuration
 						["rust-analyzer"] = {

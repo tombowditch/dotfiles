@@ -100,6 +100,18 @@ return {
 					})
 				end,
 			},
+			{
+				";r",
+				function()
+					require("telescope.builtin").oldfiles({ cwd_only = true })
+				end,
+			},
+			{
+				";R",
+				function()
+					require("telescope.builtin").oldfiles()
+				end,
+			},
 		},
 	},
 	{
