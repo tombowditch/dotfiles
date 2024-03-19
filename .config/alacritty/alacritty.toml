@@ -1,0 +1,125 @@
+[cursor.style]
+blinking = "On"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "BerkeleyMono Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "BerkeleyMono Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "BerkeleyMono Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "BerkeleyMono Nerd Font Mono"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = "#"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00021"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00022"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00023"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00024"
+key = "Key4"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00025"
+key = "Key5"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00026"
+key = "Key6"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00027"
+key = "Key7"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00028"
+key = "Key8"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00029"
+key = "Key9"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = """
+\u001B:w
+"""
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002x"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002T"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002g"
+key = "G"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002G"
+key = "G"
+mods = "Command|Shift"
+
+[scrolling]
+history = 100000
+
+[shell]
+args = ["-l", "-c", "tmux -u attach || tmux -u"]
+program = "/run/current-system/sw/bin/zsh"
+
+[window]
+dynamic_padding = false
+dynamic_title = true
+
+[window.dimensions]
+columns = 160
+lines = 50
+
+[window.padding]
+x = 2
+y = 0
