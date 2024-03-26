@@ -21,3 +21,8 @@ vim.opt.splitbelow = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
 vim.opt.wrap = true
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = { "*tmux.conf" },
+	command = "execute 'silent !tmux source <afile> --silent'",
+})
