@@ -15,6 +15,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.cmd([[command! -nargs=0 GoToFile :Telescope smart_open]])
+
 require("lazy").setup("plugins")
 
 require("map")

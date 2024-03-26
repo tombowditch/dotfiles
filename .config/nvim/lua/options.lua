@@ -26,3 +26,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = { "*tmux.conf" },
 	command = "execute 'silent !tmux source <afile> --silent'",
 })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if vim.fn.argv(0) == "" then
+			require("telescope").extensions.smart_open.smart_open()
+		end
+	end,
+})
