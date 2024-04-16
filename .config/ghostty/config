@@ -69,7 +69,7 @@ font-feature = calt
 font-feature = liga
 
 # Font size in points
-font-size = 12
+font-size = 13
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -114,7 +114,7 @@ font-codepoint-map =
 
 # Draw fonts with a thicker stroke, if supported. This is only supported
 # currently on MacOS.
-font-thicken = false
+font-thicken = true
 
 # All of the configurations behavior adjust various metrics determined by the
 # font. The values can be integers (1, -1, etc.) or a percentage (20%, -15%,
@@ -141,7 +141,7 @@ font-thicken = false
 #
 #   * Powerline glyphs will be adjusted along with the cell height so
 #     that things like status lines continue to look aligned.
-adjust-cell-width =
+adjust-cell-width = -1
 
 adjust-cell-height =
 adjust-font-baseline =
