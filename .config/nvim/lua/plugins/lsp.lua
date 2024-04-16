@@ -281,10 +281,18 @@ return {
 							},
 							procMacro = {
 								enable = true,
+								ignored = {
+									leptos_macro = {
+										"server",
+									},
+								},
 							},
 							checkOnSave = {
 								allFeatures = true,
 								command = "clippy",
+							},
+							rustfmt = {
+								overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
 							},
 						},
 					},
