@@ -13,3 +13,6 @@ ln -s ~/code/dotfiles/.config/tmux ~/.config/tmux
 
 # alacritty
 ln -s ~/code/dotfiles/.config/alacritty ~/.config/alacritty
+
+# ghostty
+ln -s ~/code/dotfiles/.config/ghostty ~/.config/ghostty
