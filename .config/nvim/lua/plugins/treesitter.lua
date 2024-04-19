@@ -27,7 +27,6 @@ return {
 					"prisma",
 					"go",
 					"rust",
-					"help",
 					"markdown",
 					"markdown_inline",
 				},
