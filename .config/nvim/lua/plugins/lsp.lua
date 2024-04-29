@@ -291,9 +291,9 @@ return {
 								allFeatures = true,
 								command = "clippy",
 							},
-							rustfmt = {
-								overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
-							},
+							-- rustfmt = {
+							-- 	overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+							-- },
 						},
 					},
 				},
