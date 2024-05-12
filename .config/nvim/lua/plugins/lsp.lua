@@ -213,6 +213,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
+		enabled = false,
 		config = function()
 			require("copilot").setup({
 				panel = {
@@ -291,9 +292,9 @@ return {
 								allFeatures = true,
 								command = "clippy",
 							},
-							rustfmt = {
-								overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
-							},
+							-- rustfmt = {
+							-- 	overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+							-- },
 						},
 					},
 				},
