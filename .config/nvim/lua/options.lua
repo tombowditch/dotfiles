@@ -30,7 +30,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		if vim.fn.argv(0) == "" then
-			require("telescope").extensions.smart_open.smart_open()
+			-- require("telescope").extensions.smart_open.smart_open()
+			require("fzf-lua").files({})
 		end
 	end,
 })
