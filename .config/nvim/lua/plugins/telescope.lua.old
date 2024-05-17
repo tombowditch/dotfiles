@@ -57,71 +57,71 @@ return {
 			},
 		},
 		-- keybinds
-		keys = {
-			{
-				";f",
-				function()
-					require("telescope.builtin").find_files({ hidden = true, respect_gitignore = false })
-				end,
-			},
-			{
-				";g",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-			},
-			{
-				"\\\\",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-			},
-			{
-				";;",
-				function()
-					require("telescope.builtin").resume()
-				end,
-			},
-			{
-				";e",
-				function()
-					require("telescope.builtin").diagnostics()
-				end,
-			},
-			{
-				";F",
-				function()
-					require("telescope").extensions.file_browser.file_browser({
-						path = "%:p:h",
-						cwd = vim.fn.expand("%:p:h"),
-						respect_gitignore = false,
-						hidden = true,
-						grouped = true,
-						previewer = false,
-						initial_mode = "insert",
-						layout_config = { height = 40 },
-					})
-				end,
-			},
-			{
-				";r",
-				function()
-					require("telescope.builtin").oldfiles({ cwd_only = true })
-				end,
-			},
-			{
-				";s",
-				function()
-					require("telescope").extensions.smart_open.smart_open()
-				end,
-			},
-			{
-				";R",
-				function()
-					require("telescope.builtin").oldfiles()
-				end,
-			},
-		},
+		-- keys = {
+		-- 	{
+		-- 		";f",
+		-- 		function()
+		-- 			require("telescope.builtin").find_files({ hidden = true, respect_gitignore = false })
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";g",
+		-- 		function()
+		-- 			require("telescope.builtin").live_grep()
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		"\\\\",
+		-- 		function()
+		-- 			require("telescope.builtin").buffers()
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";;",
+		-- 		function()
+		-- 			require("telescope.builtin").resume()
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";e",
+		-- 		function()
+		-- 			require("telescope.builtin").diagnostics()
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";F",
+		-- 		function()
+		-- 			require("telescope").extensions.file_browser.file_browser({
+		-- 				path = "%:p:h",
+		-- 				cwd = vim.fn.expand("%:p:h"),
+		-- 				respect_gitignore = false,
+		-- 				hidden = true,
+		-- 				grouped = true,
+		-- 				previewer = false,
+		-- 				initial_mode = "insert",
+		-- 				layout_config = { height = 40 },
+		-- 			})
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";r",
+		-- 		function()
+		-- 			require("telescope.builtin").oldfiles({ cwd_only = true })
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";s",
+		-- 		function()
+		-- 			require("telescope").extensions.smart_open.smart_open()
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		";R",
+		-- 		function()
+		-- 			require("telescope.builtin").oldfiles()
+		-- 		end,
+		-- 	},
+		-- },
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
