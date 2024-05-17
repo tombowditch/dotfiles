@@ -27,8 +27,6 @@ return {
 					"prisma",
 					"go",
 					"rust",
-					"markdown",
-					"markdown_inline",
 				},
 				ignore_install = {
 					"phpdoc",
