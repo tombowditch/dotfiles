@@ -177,7 +177,8 @@ return {
 					vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 					vim.keymap.set("n", "gd", function()
-						require("telescope.builtin").lsp_definitions({ reuse_win = true })
+						-- require("telescope.builtin").lsp_definitions({ reuse_win = true })
+						require("fzf-lua").lsp_definitions({})
 					end, bufopts)
 					vim.keymap.set("n", "gf", "<Cmd>Telescope lsp_references<CR>", bufopts)
 					vim.keymap.set("n", "gR", function()
@@ -263,7 +264,7 @@ return {
 				-- Plugin configuration
 				tools = {
 					code_actions = {
-						use_telescope = true,
+						-- use_telescope = true,
 					},
 				},
 				-- LSP configuration
