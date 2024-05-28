@@ -253,12 +253,6 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^4",
 		ft = { "rust" },
-		dependencies = {
-			{
-				"lvimuser/lsp-inlayhints.nvim",
-				opts = {},
-			},
-		},
 		config = function()
 			vim.g.rustaceanvim = {
 				-- Plugin configuration
