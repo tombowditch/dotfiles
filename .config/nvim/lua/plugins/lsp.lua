@@ -65,19 +65,6 @@ return {
 							capabilities = capabilities,
 						})
 					end,
-					-- ["rust_analyzer"] = function()
-					--   local lspconfig = require("lspconfig")
-					--   lspconfig.rust_analyzer.setup({
-					--     capabilities = capabilities,
-					--     settings = {
-					--       ["rust-analyzer"] = {
-					--         checkOnSave = {
-					--           command = "clippy",
-					--         },
-					--       },
-					--     },
-					--   })
-					-- end,
 					["lua_ls"] = function()
 						local lspconfig = require("lspconfig")
 						lspconfig.lua_ls.setup({
@@ -161,7 +148,7 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("tb-lsp-attach", { clear = true }),
 				callback = function(event)
-					local bufopts = { noremap = true, silent = true, buffer = bufnr }
+					local bufopts = { noremap = true, silent = true, buffer = event.buf }
 
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 					if client == nil then
@@ -172,6 +159,13 @@ return {
 					-- do not setup bindings for copilot
 					if client.name == "copilot" then
 						return
+					end
+
+					if client.server_capabilities.inlayHintProvider then
+						vim.g.inlay_hints_visible = true
+						vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+					else
+						print("no inlay hints available")
 					end
 
 					vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", bufopts)
