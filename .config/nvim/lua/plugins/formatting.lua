@@ -21,10 +21,12 @@ return {
 			rust = { "rust-analyzer" }, -- client name in rustaceanvim is -, not _ -- see https://github.com/mrcjkb/rustaceanvim/issues/28
 			proto = { "bufls", "null_ls" },
 		},
-		format_on_save = {
-			lsp_fallback = true,
-			async = false,
-			timeout_ms = 500,
-		},
+
+		format_on_save = function(bufnr)
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+			return { timeout_ms = 500, lsp_fallback = true, async = false }
+		end,
 	},
 }
