@@ -21,6 +21,7 @@ vim.opt.splitbelow = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
 vim.opt.wrap = true
+vim.g.inlay_hints_visible = true
 
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = { "*tmux.conf" },

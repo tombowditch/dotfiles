@@ -60,4 +60,3 @@
   "vitesse.nvim": { "branch": "main", "commit": "ca27c5026d7014c7a5ab63ab754b4693eb3d2e25" },
   "which-key.nvim": { "branch": "main", "commit": "0099511294f16b81c696004fa6a403b0ae61f7a0" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
-}
