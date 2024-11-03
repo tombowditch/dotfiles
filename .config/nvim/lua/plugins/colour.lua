@@ -78,4 +78,13 @@ return {
 		"akinsho/horizon.nvim",
 		version = "*",
 	},
+	{
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true,
+			cache = true,
+		},
+	},
 }

@@ -28,3 +28,6 @@ vim.cmd.colorscheme("kanagawa")
 -- vim.cmd.colorscheme("github_light")
 
 -- vim.cmd.colorscheme("horizon")
+
+-- CYBERDREAM
+-- vim.cmd.colorscheme("cyberdream")
