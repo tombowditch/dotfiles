@@ -1,5 +1,23 @@
 return {
 	{
+		"saghen/blink.cmp",
+		lazy = false,
+		dependencies = "rafamadriz/friendly-snippets",
+		version = "v0.*",
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			keymap = { preset = "enter" },
+			highlight = {
+				use_nvim_cmp_as_default = true,
+			},
+			nerd_font_variant = "mono",
+			accept = { auto_brackets = { enabled = true } },
+			trigger = { signature_help = { enabled = true } },
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		dependencies = {
@@ -10,13 +28,7 @@ return {
 			-- Mason auto installer
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			-- Completion
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/nvim-cmp",
 			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
 			-- Other
 			"rafamadriz/friendly-snippets",
 			"onsails/lspkind.nvim",
@@ -47,15 +59,9 @@ return {
 				},
 			})
 
-			local cmp = require("cmp")
-			local cmp_lsp = require("cmp_nvim_lsp")
+			local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities())
 
-			local capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				vim.lsp.protocol.make_client_capabilities(),
-				cmp_lsp.default_capabilities()
-			)
+			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			require("mason").setup()
 			require("mason-lspconfig").setup({
@@ -78,52 +84,6 @@ return {
 							},
 						})
 					end,
-				},
-			})
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				completion = {
-					completopt = "menu,menuone,noinsert",
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
-				}),
-				formatting = {
-					fields = {
-						cmp.ItemField.Menu,
-						cmp.ItemField.Abbr,
-						cmp.ItemField.Kind,
-					},
-					format = require("lspkind").cmp_format({
-						mode = "symbol_text",
-						menu = {
-							buffer = "[BUF]",
-							nvim_lsp = "[LSP]",
-							nvim_lua = "[LUA]",
-							path = "[PATH]",
-							luasnip = "[SNIP]",
-						},
-						before = require("tailwindcss-colorizer-cmp").formatter,
-					}),
 				},
 			})
 
